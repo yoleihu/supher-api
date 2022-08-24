@@ -1,4 +1,4 @@
-import { Guardian } from '@prisma/client';
+import { Guardian } from "@prisma/client";
 
 export class GuardianEntity implements Guardian {
   id: number;

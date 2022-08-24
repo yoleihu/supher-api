@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { CreateGuardianDto } from './dto/create-guardian.dto';
-import { UpdateGuardianDto } from './dto/update-guardian.dto';
+import { Injectable } from "@nestjs/common";
+import { CreateGuardianDto } from "./dto/create-guardian.dto";
+import { UpdateGuardianDto } from "./dto/update-guardian.dto";
 
 @Injectable()
 export class GuardianService {
   create(createGuardianDto: CreateGuardianDto) {
-    return 'This action adds a new guardian';
+    return "This action adds a new guardian";
   }
 
   findAll() {
