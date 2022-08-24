@@ -19,6 +19,7 @@ model Guardian {
   cep       String @db.VarChar(9)
   password  String @db.VarChar(255)
   Pet       Pet[]
+  @@map("guadian")
 }
 
 model BloodCenter {
@@ -30,6 +31,8 @@ model BloodCenter {
   telephone   String        @db.VarChar(45)
   password    String        @db.VarChar(255)
   Appointment Appointment[]
+  @@map("bloodCenter")
+
 }
 
 model Pet {
@@ -39,9 +42,9 @@ model Pet {
   name               String           @db.VarChar(150)
   species            Species          @relation(fields: [speciesId], references: [id])
   speciesId          Int
-  statusToDonation   StatusToDonation @relation(fields: [statusToDonationId], references: [id])
+  statusToDonation   Status
   statusToDonationId Int
-  sexOfPet           SexOfPet         @relation(fields: [sexOfPetId], references: [id])
+  sexOfPet           Sex
   sexOfPetId         Int
   age                String           @db.VarChar(2)
   bloodType          BloodType        @relation(fields: [bloodTypeId], references: [id])
@@ -50,19 +53,10 @@ model Pet {
   breed              Breed            @relation(fields: [breedId], references: [id])
   breedId            Int
   Appointment        Appointment[]
+  @@map("pet")
+
 }
 
-model StatusToDonation {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(150)
-  Pet  Pet[]
-}
-
-model SexOfPet {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(150)
-  Pet  Pet[]
-}
 
 model Species {
   id        Int         @id @default(autoincrement())
@@ -111,4 +105,14 @@ model AppointmentType {
   id          Int           @id @default(autoincrement())
   name        String        @db.VarChar(150)
   Appointment Appointment[]
+}
+
+enum Sex {
+  FAMALE
+  MALE
+}
+
+enum Status {
+  FIT
+  UNFIT
 }
