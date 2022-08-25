@@ -15,7 +15,6 @@ export class CreateGuardianDto {
   email: string;
 
   @IsNotEmpty()
-  @IsPhoneNumber()
   telephone: string;
 
   @IsNotEmpty()

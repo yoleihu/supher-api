@@ -5,7 +5,7 @@ import { UpdateGuardianDto } from '../dto/update-guardian.dto';
 import { GuardianEntity } from '../entities/guardian.entity';
 
 @Injectable()
-export class GuadianRepository {
+export class GuardianRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createGuardianDto: CreateGuardianDto): Promise<GuardianEntity> {
