@@ -8,10 +8,10 @@ import * as bcrypt from "bcrypt";
 export class BloodCenterService {
   constructor(private readonly repository: BloodCenterRepository) {}
 
-  create(createGuardianDto: CreateBloodCenterDto) {
+  create(createBloodCenterDto: CreateBloodCenterDto) {
     const newUser = {
-      ...createGuardianDto,
-      password: bcrypt.hashSync(createGuardianDto.password, 8),
+      ...createBloodCenterDto,
+      password: bcrypt.hashSync(createBloodCenterDto.password, 8),
     };
     return this.repository.create(newUser);
   }
@@ -24,8 +24,8 @@ export class BloodCenterService {
     return this.repository.findOne(id);
   }
 
-  update(id: number, updateGuardianDto: UpdateBloodCenterDto) {
-    return this.repository.update(id, updateGuardianDto);
+  update(id: number, updateBloodCenterDto: UpdateBloodCenterDto) {
+    return this.repository.update(id, updateBloodCenterDto);
   }
 
   remove(id: number) {

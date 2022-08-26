@@ -14,10 +14,10 @@ model Guardian {
   id        Int     @id @default(autoincrement())
   cpf       String  @unique @db.VarChar(11)
   name      String  @db.VarChar(150)
-  address   String? @unique @db.VarChar(150)
+  address   String? @db.VarChar(150)
   email     String  @unique @db.VarChar(150)
   telephone String  @db.VarChar(45)
-  cep       String?  @db.VarChar(9)
+  cep       String? @db.VarChar(9)
   password  String  @db.VarChar(255)
   Pet       Pet[]
 

@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
 export class CreateBloodCenterDto {
   id: number;
@@ -17,10 +17,10 @@ export class CreateBloodCenterDto {
   @IsNotEmpty()
   telephone: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   cep: string | null;
 
-  @IsNotEmpty()
+  @IsOptional()
   address: string | null;
 
   @IsNotEmpty()
