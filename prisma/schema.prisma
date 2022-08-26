@@ -11,14 +11,16 @@ datasource db {
 }
 
 model Guardian {
-  id        Int    @id @default(autoincrement())
-  cpf       String @unique @db.VarChar(11)
-  name      String @db.VarChar(150)
-  email     String @unique @db.VarChar(150)
-  telephone String @db.VarChar(45)
-  cep       String @db.VarChar(9)
-  password  String @db.VarChar(255)
+  id        Int     @id @default(autoincrement())
+  cpf       String  @unique @db.VarChar(11)
+  name      String  @db.VarChar(150)
+  address   String? @unique @db.VarChar(150)
+  email     String  @unique @db.VarChar(150)
+  telephone String  @db.VarChar(45)
+  cep       String?  @db.VarChar(9)
+  password  String  @db.VarChar(255)
   Pet       Pet[]
+
   @@map("guadian")
 }
 
@@ -26,37 +28,37 @@ model BloodCenter {
   id          Int           @id @default(autoincrement())
   cnpj        String        @unique @db.VarChar(14)
   name        String        @db.VarChar(150)
-  address     String        @unique @db.VarChar(150)
+  address     String?       @unique @db.VarChar(150)
   email       String        @unique @db.VarChar(150)
   telephone   String        @db.VarChar(45)
+  cep         String?       @db.VarChar(9)
   password    String        @db.VarChar(255)
   Appointment Appointment[]
-  @@map("bloodCenter")
 
+  @@map("bloodCenter")
 }
 
 model Pet {
-  id                 Int              @id @default(autoincrement())
-  guardian           Guardian         @relation(fields: [guardianId], references: [id])
+  id                 Int           @id @default(autoincrement())
+  guardian           Guardian      @relation(fields: [guardianId], references: [id])
   guardianId         Int
-  name               String           @db.VarChar(150)
-  species            Species          @relation(fields: [speciesId], references: [id])
+  name               String        @db.VarChar(150)
+  species            Species       @relation(fields: [speciesId], references: [id])
   speciesId          Int
   statusToDonation   Status
   statusToDonationId Int
   sexOfPet           Sex
   sexOfPetId         Int
-  age                String           @db.VarChar(2)
-  bloodType          BloodType        @relation(fields: [bloodTypeId], references: [id])
+  age                String        @db.VarChar(2)
+  bloodType          BloodType     @relation(fields: [bloodTypeId], references: [id])
   bloodTypeId        Int
-  weight             String           @db.VarChar(5)
-  breed              Breed            @relation(fields: [breedId], references: [id])
+  weight             String        @db.VarChar(5)
+  breed              Breed         @relation(fields: [breedId], references: [id])
   breedId            Int
   Appointment        Appointment[]
+
   @@map("pet")
-
 }
-
 
 model Species {
   id        Int         @id @default(autoincrement())

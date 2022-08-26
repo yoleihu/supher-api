@@ -1,10 +1,10 @@
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
 
-export class CreateGuardianDto {
+export class CreateBloodCenterDto {
   id: number;
 
   @IsNotEmpty()
-  cpf: string;
+  cnpj: string;
 
   @IsNotEmpty()
   @IsString()

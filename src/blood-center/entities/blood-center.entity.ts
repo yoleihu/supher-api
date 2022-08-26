@@ -1,8 +1,8 @@
-import { Guardian } from "@prisma/client";
+import { BloodCenter } from "@prisma/client";
 
-export class GuardianEntity implements Guardian {
+export class BloodCenterEntity implements BloodCenter {
   id: number;
-  cpf: string;
+  cnpj: string;
   name: string;
   email: string;
   telephone: string;
