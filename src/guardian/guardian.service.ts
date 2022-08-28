@@ -3,6 +3,7 @@ import { CreateGuardianDto } from "./dto/create-guardian.dto";
 import { UpdateGuardianDto } from "./dto/update-guardian.dto";
 import { GuardianRepository } from "./repositories/guardian.repository";
 import * as bcrypt from "bcrypt";
+import { GuardianEntity } from "./entities/guardian.entity";
 
 @Injectable()
 export class GuardianService {
@@ -20,9 +21,9 @@ export class GuardianService {
     return this.repository.findAll();
   }
 
-  findOne(id: number) {
+/*   findOne(id: number) {
     return this.repository.findOne(id);
-  }
+  } */
 
   update(id: number, updateGuardianDto: UpdateGuardianDto) {
     return this.repository.update(id, updateGuardianDto);
@@ -30,5 +31,9 @@ export class GuardianService {
 
   remove(id: number) {
     return this.repository.remove(id);
+  }
+
+  async findOne(email: string): Promise<GuardianEntity | undefined> {
+    return this.repository.findByEmail(email);
   }
 }

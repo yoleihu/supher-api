@@ -7,5 +7,6 @@ import { GuardianRepository } from "./repositories/guardian.repository";
 @Module({
   controllers: [GuardianController],
   providers: [GuardianService, PrismaService, GuardianRepository],
+  exports: [GuardianService],
 })
 export class GuardianModule {}
