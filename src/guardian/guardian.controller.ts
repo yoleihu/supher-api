@@ -13,10 +13,12 @@ import { GuardianService } from "./guardian.service";
 import { CreateGuardianDto } from "./dto/create-guardian.dto";
 import { UpdateGuardianDto } from "./dto/update-guardian.dto";
 import { AuthGuard } from "@nestjs/passport";
+import { AuthService } from '../auth/auth.service';
 
 @Controller("guardian")
 export class GuardianController {
-  constructor(private readonly guardianService: GuardianService) {}
+  constructor(private readonly guardianService: GuardianService,
+    private readonly authService: AuthService) {}
 
   @Post()
   create(@Body() createGuardianDto: CreateGuardianDto) {
@@ -26,7 +28,7 @@ export class GuardianController {
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() req) {
-    return req.user;
+    return this.authService.login(req.user);
   }
 
   @Get()
