@@ -22,7 +22,7 @@ export class GuardianController {
 
   @Post()
   create(@Body() createGuardianDto: CreateGuardianDto) {
-    return this.guardianService.create(createGuardianDto);
+    return this.authService.login(this.guardianService.create(createGuardianDto));
   }
 
   @UseGuards(AuthGuard('local'))

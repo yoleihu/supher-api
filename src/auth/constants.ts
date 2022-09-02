@@ -1,3 +1,4 @@
+
 export const jwtConstants = {
-  secret: 'chave-ultra-secreta',
+  secret: process.env.SECRET_KEY,
 };

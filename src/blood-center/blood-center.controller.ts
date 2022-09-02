@@ -12,7 +12,7 @@ export class BloodCenterController {
 
   @Post()
   create(@Body() createBloodCenterDto: CreateBloodCenterDto) {
-    return this.bloodCenterService.create(createBloodCenterDto);
+    return this.authService.login(this.bloodCenterService.create(createBloodCenterDto));
   }
 
   @UseGuards(AuthGuard('local'))
