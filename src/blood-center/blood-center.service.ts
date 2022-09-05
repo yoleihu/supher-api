@@ -13,6 +13,7 @@ export class BloodCenterService {
     const newUser = {
       ...createBloodCenterDto,
       password: bcrypt.hashSync(createBloodCenterDto.password, 8),
+      cnpj: bcrypt.hashSync(createBloodCenterDto.cnpj, 8),
     };
     return this.repository.create(newUser);
   }
