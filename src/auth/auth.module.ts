@@ -6,6 +6,7 @@ import { LocalStrategy } from './local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { BloodCenterModule } from 'src/blood-center/blood-center.module';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [GuardianModule,
@@ -15,7 +16,7 @@ import { BloodCenterModule } from 'src/blood-center/blood-center.module';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60s' },
     }),],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
   exports:[JwtModule, AuthService]
 })
 export class AuthModule {}

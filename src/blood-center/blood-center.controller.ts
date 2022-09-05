@@ -4,6 +4,7 @@ import { BloodCenterService } from './blood-center.service';
 import { CreateBloodCenterDto } from './dto/create-blood-center.dto';
 import { AuthGuard } from "@nestjs/passport";
 import { UpdateBloodCenterDto } from './dto/update-blood-center.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('blood-center')
 export class BloodCenterController {
@@ -21,7 +22,8 @@ export class BloodCenterController {
     return this.authService.login(req.user);
   }
 
-  @Get()
+  @UseGuards(JwtAuthGuard)
+  @Get('list')
   findAll() {
     return this.bloodCenterService.findAll();
   }

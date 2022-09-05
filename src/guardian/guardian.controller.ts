@@ -14,6 +14,7 @@ import { CreateGuardianDto } from "./dto/create-guardian.dto";
 import { UpdateGuardianDto } from "./dto/update-guardian.dto";
 import { AuthGuard } from "@nestjs/passport";
 import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 
 @Controller("guardian")
 export class GuardianController {
@@ -31,7 +32,8 @@ export class GuardianController {
     return this.authService.login(req.user);
   }
 
-  @Get()
+  @UseGuards(JwtAuthGuard)
+  @Get('list')
   findAll() {
     return this.guardianService.findAll();
   }
