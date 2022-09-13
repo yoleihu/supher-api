@@ -9,4 +9,5 @@ export class GuardianEntity implements Guardian {
   cep: string | null;
   address: string | null;
   password: string;
+  signUpDate: Date;
 }

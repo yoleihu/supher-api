@@ -37,4 +37,14 @@ export class TokenRepository {
       data: createTokenDto,
     })
   }
+
+  delete(username: string){
+    this.prisma.token.delete(
+      {
+        where: {
+          username,
+        },
+      }
+    )
+  }
 }

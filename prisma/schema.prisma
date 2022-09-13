@@ -11,22 +11,23 @@ datasource db {
 }
 
 model Token {
-  hash      String  @unique @db.VarChar(256)
-  username  String  @unique @db.VarChar(150)
+  hash     String @unique @db.VarChar(256)
+  username String @unique @db.VarChar(150)
 
   @@map("token")
 }
 
 model Guardian {
-  id        Int     @id @default(autoincrement())
-  cpf       String  @unique @db.VarChar(11)
-  name      String  @db.VarChar(150)
-  address   String? @db.VarChar(150)
-  email     String  @unique @db.VarChar(150)
-  telephone String  @db.VarChar(45)
-  cep       String? @db.VarChar(9)
-  password  String  @db.VarChar(255)
-  Pet       Pet[]
+  id         Int      @id @default(autoincrement())
+  cpf        String   @unique @db.VarChar(11)
+  name       String   @db.VarChar(150)
+  address    String?  @db.VarChar(150)
+  email      String   @unique @db.VarChar(150)
+  telephone  String   @db.VarChar(45)
+  cep        String?  @db.VarChar(9)
+  password   String   @db.VarChar(255)
+  signUpDate DateTime @default(now())
+  Pet        Pet[]
 
   @@map("guadian")
 }
@@ -40,6 +41,7 @@ model BloodCenter {
   telephone   String        @db.VarChar(45)
   cep         String?       @db.VarChar(9)
   password    String        @db.VarChar(255)
+  signUpDate  DateTime      @default(now())
   Appointment Appointment[]
 
   @@map("bloodCenter")

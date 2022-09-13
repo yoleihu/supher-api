@@ -37,4 +37,8 @@ export class TokenService {
   update(username: string, createTokenDto: CreateTokenDto) {
     return this.repository.update(username, createTokenDto);
   }
+
+  delete(username: string) {
+    this.repository.delete(username);
+  }
 }
