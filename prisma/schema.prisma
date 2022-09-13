@@ -10,6 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Token {
+  hash      String  @unique @db.VarChar(256)
+  username  String  @unique @db.VarChar(150)
+
+  @@map("token")
+}
+
 model Guardian {
   id        Int     @id @default(autoincrement())
   cpf       String  @unique @db.VarChar(11)
