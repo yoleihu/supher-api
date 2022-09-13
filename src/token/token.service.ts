@@ -30,7 +30,7 @@ export class TokenService {
       const usuario = (await this.guardianService.findOne(objToken.username)|| await this.bloodCenterService.findOne(objToken.username));
       return this.authService.login(usuario);
     } else {
-      return new HttpException("Token Inválido", HttpStatus.UNAUTHORIZED)
+      return new HttpException("Usuário não autorizado.", HttpStatus.UNAUTHORIZED)
     }
   }
 
