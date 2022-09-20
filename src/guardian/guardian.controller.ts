@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Request,
+  HttpException,
 } from "@nestjs/common";
 import { GuardianService } from "./guardian.service";
 import { CreateGuardianDto } from "./dto/create-guardian.dto";
@@ -43,6 +44,7 @@ export class GuardianController {
     return this.guardianService.findOne(email);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(":id")
   update(
     @Param("id") id: string,
@@ -54,5 +56,13 @@ export class GuardianController {
   @Delete(":id")
   remove(@Param("id") id: string) {
     return this.guardianService.remove(+id);
+  }
+
+  @Post("generate-link")
+  generateLink (@Body() body: any) {
+    if(this.guardianService.findOne(body.email)) {
+      return(this.authService.generateLink(body.email, body.url))
+    }
+    return new HttpException("O e-mail informado não está cadastrado.", 404);
   }
 }

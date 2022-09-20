@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, HttpException } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { BloodCenterService } from './blood-center.service';
 import { CreateBloodCenterDto } from './dto/create-blood-center.dto';
@@ -33,6 +33,7 @@ export class BloodCenterController {
     return this.bloodCenterService.findOne(email);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBloodCenterDto: UpdateBloodCenterDto) {
     return this.bloodCenterService.update(+id, updateBloodCenterDto);
@@ -41,5 +42,13 @@ export class BloodCenterController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.bloodCenterService.remove(+id);
+  }
+
+  @Post("generate-link")
+  generateLink (@Body() body: any) {
+    if(this.bloodCenterService.findOne(body.email)) {
+      return(this.authService.generateLink(body.email, body.url))
+    }
+    return new HttpException("O e-mail informado não está cadastrado.", 404);
   }
 }
