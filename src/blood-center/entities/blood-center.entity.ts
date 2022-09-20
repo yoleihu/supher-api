@@ -9,4 +9,5 @@ export class BloodCenterEntity implements BloodCenter {
   cep: string | null;
   address: string | null;
   password: string;
+  signUpDate: Date;
 }

@@ -13,6 +13,7 @@ export class GuardianService {
     const newUser = {
       ...createGuardianDto,
       password: bcrypt.hashSync(createGuardianDto.password, 8),
+      cpf: bcrypt.hashSync(createGuardianDto.cpf, 8),
     };
     return this.repository.create(newUser);
   }

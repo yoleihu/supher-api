@@ -8,12 +8,14 @@ import {
   Delete,
   UseGuards,
   Request,
+  HttpException,
 } from "@nestjs/common";
 import { GuardianService } from "./guardian.service";
 import { CreateGuardianDto } from "./dto/create-guardian.dto";
 import { UpdateGuardianDto } from "./dto/update-guardian.dto";
 import { AuthGuard } from "@nestjs/passport";
 import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 
 @Controller("guardian")
 export class GuardianController {
@@ -22,7 +24,7 @@ export class GuardianController {
 
   @Post()
   create(@Body() createGuardianDto: CreateGuardianDto) {
-    return this.guardianService.create(createGuardianDto);
+    return this.authService.login(this.guardianService.create(createGuardianDto));
   }
 
   @UseGuards(AuthGuard('local'))
@@ -31,7 +33,8 @@ export class GuardianController {
     return this.authService.login(req.user);
   }
 
-  @Get()
+  @UseGuards(JwtAuthGuard)
+  @Get('list')
   findAll() {
     return this.guardianService.findAll();
   }
@@ -41,6 +44,7 @@ export class GuardianController {
     return this.guardianService.findOne(email);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(":id")
   update(
     @Param("id") id: string,
@@ -52,5 +56,13 @@ export class GuardianController {
   @Delete(":id")
   remove(@Param("id") id: string) {
     return this.guardianService.remove(+id);
+  }
+
+  @Post("generate-link")
+  generateLink (@Body() body: any) {
+    if(this.guardianService.findOne(body.email)) {
+      return(this.authService.generateLink(body.email, body.url))
+    }
+    return new HttpException("O e-mail informado não está cadastrado.", 404);
   }
 }
