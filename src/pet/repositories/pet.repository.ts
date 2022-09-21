@@ -21,6 +21,23 @@ export class PetRepository {
     });
   }
 
+  findOne(id: number): Promise<PetEntity> {
+    return this.prisma.pet.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
+  findOneByNameAndGuardian(name: string, guardianId: number): Promise<PetEntity> {
+    return this.prisma.pet.findFirst({
+      where: {
+        name,
+        guardianId
+      },
+    });
+  }
+
   async update(id: number, createPetDto: CreatePetDto): Promise<PetEntity> {
     return this.prisma.pet.update({
       where: {

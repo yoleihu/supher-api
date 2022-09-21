@@ -18,6 +18,11 @@ export class PetController {
     return this.petService.findAllByGuardianId(guardianId);
   }
 
+  @Get(":id")
+  findOne(@Param("id") id: number) {
+    return this.petService.findOne(id);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Patch(":id")
   update(

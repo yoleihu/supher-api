@@ -22,10 +22,6 @@ export class GuardianService {
     return this.repository.findAll();
   }
 
-/*   findOne(id: number) {
-    return this.repository.findOne(id);
-  } */
-
   update(id: number, updateGuardianDto: UpdateGuardianDto) {
     return this.repository.update(id, updateGuardianDto);
   }
