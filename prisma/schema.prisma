@@ -54,16 +54,14 @@ model Pet {
   name               String        @db.VarChar(150)
   species            Species       @relation(fields: [speciesId], references: [id])
   speciesId          Int
-  statusToDonation   Status
-  statusToDonationId Int
+  statusToDonation   Status?
   sexOfPet           Sex
-  sexOfPetId         Int
-  age                String        @db.VarChar(2)
-  bloodType          BloodType     @relation(fields: [bloodTypeId], references: [id])
-  bloodTypeId        Int
-  weight             String        @db.VarChar(5)
-  breed              Breed         @relation(fields: [breedId], references: [id])
-  breedId            Int
+  age                String?       @db.VarChar(2)
+  bloodType          BloodType?    @relation(fields: [bloodTypeId], references: [id])
+  bloodTypeId        Int?
+  weight             String?       @db.VarChar(5)
+  breed              Breed?        @relation(fields: [breedId], references: [id])
+  breedId            Int?
   Appointment        Appointment[]
 
   @@map("pet")
