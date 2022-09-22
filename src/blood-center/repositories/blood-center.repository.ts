@@ -26,6 +26,16 @@ export class BloodCenterRepository {
     });
   }
 
+  async findAllByLocal(firstNumberCep: string): Promise<BloodCenterEntity[]> {
+    return this.prisma.bloodCenter.findMany({
+      where: {
+        cep: {
+          startsWith: firstNumberCep,
+        },
+      },
+    });
+  }
+
   async findByEmail(email: string): Promise<BloodCenterEntity> {
     return this.prisma.bloodCenter.findUnique({ where: { email } });
   }
