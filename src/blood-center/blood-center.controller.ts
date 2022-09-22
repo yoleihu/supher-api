@@ -45,6 +45,7 @@ export class BloodCenterController {
     return this.bloodCenterService.update(+id, updateBloodCenterDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.bloodCenterService.remove(+id);

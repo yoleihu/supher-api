@@ -19,7 +19,7 @@ export class PetService {
   }
 
   findOneByNameAndGuardian(name: string, guardianId: number) {
-    this.repository.findOneByNameAndGuardian(name, guardianId);
+    return this.repository.findOneByNameAndGuardian(name, guardianId);
   }
 
   update(id: number, createPetDto: CreatePetDto) {

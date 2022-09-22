@@ -23,6 +23,11 @@ export class PetController {
     return this.petService.findOne(id);
   }
 
+  @Get("find-by-name")
+  findOneByNameAndGuardian(@Body() name: string, guardianId: number) {
+    return this.petService.findOneByNameAndGuardian(name, guardianId);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Patch(":id")
   update(
@@ -32,6 +37,7 @@ export class PetController {
     return this.petService.update(+id, CreatePetDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(":id")
   remove(@Param("id") id: string) {
     return this.petService.remove(+id);
