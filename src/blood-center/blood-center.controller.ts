@@ -34,11 +34,18 @@ export class BloodCenterController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('list-nears')
+  findAllByLocal(cep: string) {
+    return this.bloodCenterService.findAllByLocal(cep);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBloodCenterDto: UpdateBloodCenterDto) {
     return this.bloodCenterService.update(+id, updateBloodCenterDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.bloodCenterService.remove(+id);

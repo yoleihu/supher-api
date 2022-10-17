@@ -22,6 +22,14 @@ export class BloodCenterService {
     return this.repository.findAll();
   }
 
+  findAllByLocal(cep: string){
+    const digits = cep.split("", 9);
+    const firstDigit = digits.at(0);
+    const secondDigit = digits.at(1);
+    this.repository.findAllByLocal(firstDigit + secondDigit || firstDigit);
+    return
+  }
+
   // findOne(id: number) {
   //   return this.repository.findOne(id);
   // }

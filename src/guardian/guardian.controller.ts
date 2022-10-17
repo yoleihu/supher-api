@@ -53,6 +53,7 @@ export class GuardianController {
     return this.guardianService.update(+id, updateGuardianDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(":id")
   remove(@Param("id") id: string) {
     return this.guardianService.remove(+id);

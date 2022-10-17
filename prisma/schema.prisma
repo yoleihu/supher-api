@@ -43,28 +43,38 @@ model BloodCenter {
   password    String        @db.VarChar(255)
   signUpDate  DateTime      @default(now())
   Appointment Appointment[]
+  Alert       Alert[]
 
   @@map("bloodCenter")
 }
 
 model Pet {
-  id                 Int           @id @default(autoincrement())
-  guardian           Guardian      @relation(fields: [guardianId], references: [id])
-  guardianId         Int
-  name               String        @db.VarChar(150)
-  species            Species       @relation(fields: [speciesId], references: [id])
-  speciesId          Int
-  statusToDonation   Status?
-  sexOfPet           Sex
-  age                String?       @db.VarChar(2)
-  bloodType          BloodType?    @relation(fields: [bloodTypeId], references: [id])
-  bloodTypeId        Int?
-  weight             String?       @db.VarChar(5)
-  breed              Breed?        @relation(fields: [breedId], references: [id])
-  breedId            Int?
-  Appointment        Appointment[]
+  id               Int           @id @default(autoincrement())
+  guardian         Guardian      @relation(fields: [guardianId], references: [id])
+  guardianId       Int
+  name             String        @db.VarChar(150)
+  species          Species       @relation(fields: [speciesId], references: [id])
+  speciesId        Int
+  statusToDonation Status?
+  sexOfPet         Sex
+  age              String?       @db.VarChar(2)
+  bloodType        BloodType?    @relation(fields: [bloodTypeId], references: [id])
+  bloodTypeId      Int?
+  weight           String?       @db.VarChar(5)
+  breed            Breed?        @relation(fields: [breedId], references: [id])
+  breedId          Int?
+  Appointment      Appointment[]
 
   @@map("pet")
+}
+
+model Alert {
+  id            Int         @id @default(autoincrement())
+  data          DateTime    @default(now())
+  bloodCenter   BloodCenter @relation(fields: [bloodCenterId], references: [id])
+  bloodCenterId Int
+  bloodType     BloodType?  @relation(fields: [bloodTypeId], references: [id])
+  bloodTypeId   Int?
 }
 
 model Species {
@@ -81,6 +91,7 @@ model BloodType {
   species   Species @relation(fields: [speciesId], references: [id])
   speciesId Int
   Pet       Pet[]
+  Alert     Alert[]
 }
 
 model Breed {
