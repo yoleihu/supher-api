@@ -19,9 +19,13 @@ model Token {
 
 model Guardian {
   id         Int      @id @default(autoincrement())
-  cpf        String   @unique @db.VarChar(11)
+  cpf        String   @unique @db.VarChar(255)
   name       String   @db.VarChar(150)
+  number     String?  @db.VarChar(10)
   address    String?  @db.VarChar(150)
+  district   String?  @db.VarChar(150)
+  city       String?  @db.VarChar(150)
+  state      String?  @db.VarChar(150)
   email      String   @unique @db.VarChar(150)
   telephone  String   @db.VarChar(45)
   cep        String?  @db.VarChar(9)
@@ -34,9 +38,13 @@ model Guardian {
 
 model BloodCenter {
   id          Int           @id @default(autoincrement())
-  cnpj        String        @unique @db.VarChar(14)
+  cnpj        String        @unique @db.VarChar(255)
   name        String        @db.VarChar(150)
-  address     String?       @unique @db.VarChar(150)
+  number      String?       @db.VarChar(10)
+  address     String?       @db.VarChar(150)
+  district    String?       @db.VarChar(150)
+  city        String?       @db.VarChar(150)
+  state       String?       @db.VarChar(150)
   email       String        @unique @db.VarChar(150)
   telephone   String        @db.VarChar(45)
   cep         String?       @db.VarChar(9)
@@ -73,6 +81,8 @@ model Alert {
   data          DateTime    @default(now())
   bloodCenter   BloodCenter @relation(fields: [bloodCenterId], references: [id])
   bloodCenterId Int
+  species       Species     @relation(fields: [speciesId], references: [id])
+  speciesId     Int
   bloodType     BloodType?  @relation(fields: [bloodTypeId], references: [id])
   bloodTypeId   Int?
 }
@@ -81,6 +91,7 @@ model Species {
   id        Int         @id @default(autoincrement())
   name      String      @db.VarChar(150)
   Pet       Pet[]
+  Alert     Alert[]
   BloodType BloodType[]
   Breed     Breed[]
 }
