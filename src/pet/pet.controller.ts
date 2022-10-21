@@ -7,6 +7,7 @@ import { PetService } from "./pet.service";
 export class PetController {
   constructor(private readonly petService: PetService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createPetDto: CreatePetDto) {
     return this.petService.create(createPetDto);
@@ -18,6 +19,7 @@ export class PetController {
     return this.petService.findAllByGuardianId(guardianId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(":id")
   findOne(@Param("id") id: number) {
     return this.petService.findOne(id);

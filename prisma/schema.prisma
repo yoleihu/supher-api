@@ -139,7 +139,7 @@ model AppointmentType {
 }
 
 enum Sex {
-  FAMALE
+  FEMALE
   MALE
 }
 

@@ -14,7 +14,6 @@ export class CreatePetDto {
   speciesId: number
   statusToDonation: Status | null
 
-  @IsNotEmpty()
   sexOfPet: Sex
   age: string | null
   bloodTypeId: number | null

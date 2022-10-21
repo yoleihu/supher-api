@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "Sex" AS ENUM ('FAMALE', 'MALE');
+CREATE TYPE "Sex" AS ENUM ('FEMALE', 'MALE');
 
 -- CreateEnum
 CREATE TYPE "Status" AS ENUM ('FIT', 'UNFIT');
