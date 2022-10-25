@@ -23,6 +23,18 @@ export class CreateBloodCenterDto {
   @IsOptional()
   address: string | null;
 
+  @IsOptional()
+  number: string | null;
+
+  @IsOptional()
+  district: string | null;
+
+  @IsOptional()
+  city: string | null;
+
+  @IsOptional()
+  state: string | null;
+
   @IsNotEmpty()
   password: string;
 }

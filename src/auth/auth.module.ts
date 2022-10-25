@@ -8,9 +8,11 @@ import { jwtConstants } from './constants';
 import { BloodCenterModule } from 'src/blood-center/blood-center.module';
 import { JwtStrategy } from './jwt.strategy';
 import { TokenModule } from 'src/token/token.module';
+import { PetModule } from 'src/pet/pet.module';
 
 @Module({
   imports: [GuardianModule,
+    PetModule,
     BloodCenterModule,
     TokenModule,
     PassportModule,

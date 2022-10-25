@@ -12,11 +12,11 @@ export class CreatePetDto {
 
   @IsNotEmpty()
   speciesId: number
-  statusToDonation: Status | null
+  statusToDonation?: Status
 
   sexOfPet: Sex
-  age: string | null
-  bloodTypeId: number | null
-  weight: string | null
-  breedId: number | null
+  age?: string
+  bloodTypeId?: number
+  weight?: string
+  breedId?: number
 }

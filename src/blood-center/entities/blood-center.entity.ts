@@ -1,10 +1,7 @@
 import { BloodCenter } from "@prisma/client";
 
 export class BloodCenterEntity implements BloodCenter {
-  number: string;
-  district: string;
-  city: string;
-  state: string;
+
   id: number;
   cnpj: string;
   name: string;
@@ -12,6 +9,10 @@ export class BloodCenterEntity implements BloodCenter {
   telephone: string;
   cep: string | null;
   address: string | null;
+  number: string | null;
+  district: string | null;
+  city: string | null;
+  state: string | null;
   password: string;
   signUpDate: Date;
 }
