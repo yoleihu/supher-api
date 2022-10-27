@@ -19,7 +19,7 @@ model Token {
 
 model Guardian {
   id         Int      @id @default(autoincrement())
-  cpf        String   @unique @db.VarChar(11)
+  cpf        String   @unique @db.VarChar(14)
   name       String   @db.VarChar(150)
   number     String?  @db.VarChar(10)
   address    String?  @db.VarChar(150)
@@ -38,7 +38,7 @@ model Guardian {
 
 model BloodCenter {
   id          Int           @id @default(autoincrement())
-  cnpj        String        @unique @db.VarChar(14)
+  cnpj        String        @unique @db.VarChar(18)
   name        String        @db.VarChar(150)
   number      String?       @db.VarChar(10)
   address     String?       @db.VarChar(150)

@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "bloodCenter" ALTER COLUMN "cnpj" SET DATA TYPE VARCHAR(18);
+
+-- AlterTable
+ALTER TABLE "guadian" ALTER COLUMN "cpf" SET DATA TYPE VARCHAR(14);
