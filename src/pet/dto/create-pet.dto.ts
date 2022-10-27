@@ -1,4 +1,4 @@
-import { Sex, Status } from "@prisma/client"
+import { Sex, Species, Status  } from "@prisma/client"
 import { IsNotEmpty, IsOptional } from "class-validator"
 
 export class CreatePetDto {
@@ -9,7 +9,7 @@ export class CreatePetDto {
   name: string
 
   @IsNotEmpty()
-  species: string
+  species: Species
 
   @IsOptional()
   statusToDonation: Status | null

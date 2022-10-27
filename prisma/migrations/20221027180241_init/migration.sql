@@ -4,6 +4,9 @@ CREATE TYPE "Sex" AS ENUM ('FEMALE', 'MALE');
 -- CreateEnum
 CREATE TYPE "Status" AS ENUM ('FIT', 'UNFIT');
 
+-- CreateEnum
+CREATE TYPE "Species" AS ENUM ('CAT', 'DOG');
+
 -- CreateTable
 CREATE TABLE "token" (
     "hash" VARCHAR(256) NOT NULL,
@@ -53,7 +56,7 @@ CREATE TABLE "pet" (
     "id" SERIAL NOT NULL,
     "guardianId" INTEGER NOT NULL,
     "name" VARCHAR(150) NOT NULL,
-    "species" VARCHAR(150) NOT NULL,
+    "species" "Species" NOT NULL,
     "statusToDonation" "Status",
     "sexOfPet" "Sex" NOT NULL,
     "age" VARCHAR(2),
@@ -69,7 +72,7 @@ CREATE TABLE "alert" (
     "id" SERIAL NOT NULL,
     "data" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "bloodCenterId" INTEGER NOT NULL,
-    "species" VARCHAR(150) NOT NULL,
+    "species" "Species" NOT NULL,
     "bloodType" VARCHAR(150) NOT NULL,
 
     CONSTRAINT "alert_pkey" PRIMARY KEY ("id")

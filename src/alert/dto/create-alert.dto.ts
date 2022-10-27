@@ -1,3 +1,4 @@
+import { Species } from "@prisma/client"
 import { IsNotEmpty } from "class-validator"
 
 export class CreateAlertDto {
@@ -8,5 +9,5 @@ export class CreateAlertDto {
   @IsNotEmpty()
   bloodType: string
   @IsNotEmpty()
-  species: string
+  species: Species
 }

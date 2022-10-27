@@ -61,7 +61,7 @@ model Pet {
   guardian         Guardian      @relation(fields: [guardianId], references: [id])
   guardianId       Int
   name             String        @db.VarChar(150)
-  species          String        @db.VarChar(150)
+  species          Species
   statusToDonation Status?
   sexOfPet         Sex
   age              String?       @db.VarChar(2)
@@ -78,7 +78,7 @@ model Alert {
   data          DateTime    @default(now())
   bloodCenter   BloodCenter @relation(fields: [bloodCenterId], references: [id])
   bloodCenterId Int
-  species       String      @db.VarChar(150)
+  species          Species
   bloodType     String      @db.VarChar(150)
 
   @@map("alert")
@@ -104,4 +104,9 @@ enum Sex {
 enum Status {
   FIT
   UNFIT
+}
+
+enum Species {
+  CAT
+  DOG
 }

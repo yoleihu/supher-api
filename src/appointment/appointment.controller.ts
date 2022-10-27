@@ -15,8 +15,8 @@ export class AppointmentController {
 
   @UseGuards(JwtAuthGuard)
   @Get('list')
-  findAll(@Body() bloodCenterId: number) {
-    return this.appointmentService.findAllByBloodCenter(bloodCenterId);
+  findAll(@Param("bloodCenterId") bloodCenterId: string) {
+    return this.appointmentService.findAllByBloodCenter(+bloodCenterId);
   }
 
   @UseGuards(JwtAuthGuard)
