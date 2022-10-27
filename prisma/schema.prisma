@@ -19,7 +19,7 @@ model Token {
 
 model Guardian {
   id         Int      @id @default(autoincrement())
-  cpf        String   @unique @db.VarChar(255)
+  cpf        String   @unique @db.VarChar(11)
   name       String   @db.VarChar(150)
   number     String?  @db.VarChar(10)
   address    String?  @db.VarChar(150)
@@ -38,7 +38,7 @@ model Guardian {
 
 model BloodCenter {
   id          Int           @id @default(autoincrement())
-  cnpj        String        @unique @db.VarChar(255)
+  cnpj        String        @unique @db.VarChar(14)
   name        String        @db.VarChar(150)
   number      String?       @db.VarChar(10)
   address     String?       @db.VarChar(150)
@@ -61,16 +61,13 @@ model Pet {
   guardian         Guardian      @relation(fields: [guardianId], references: [id])
   guardianId       Int
   name             String        @db.VarChar(150)
-  species          Species       @relation(fields: [speciesId], references: [id])
-  speciesId        Int
+  species          String        @db.VarChar(150)
   statusToDonation Status?
   sexOfPet         Sex
   age              String?       @db.VarChar(2)
-  bloodType        BloodType?    @relation(fields: [bloodTypeId], references: [id])
-  bloodTypeId      Int?
+  bloodType        String?       @db.VarChar(150)
   weight           String?       @db.VarChar(5)
-  breed            Breed?        @relation(fields: [breedId], references: [id])
-  breedId          Int?
+  breed            String?       @db.VarChar(150)
   Appointment      Appointment[]
 
   @@map("pet")
@@ -81,61 +78,19 @@ model Alert {
   data          DateTime    @default(now())
   bloodCenter   BloodCenter @relation(fields: [bloodCenterId], references: [id])
   bloodCenterId Int
-  species       Species     @relation(fields: [speciesId], references: [id])
-  speciesId     Int
-  bloodType     BloodType?  @relation(fields: [bloodTypeId], references: [id])
-  bloodTypeId   Int?
-}
-
-model Species {
-  id        Int         @id @default(autoincrement())
-  name      String      @db.VarChar(150)
-  Pet       Pet[]
-  Alert     Alert[]
-  BloodType BloodType[]
-  Breed     Breed[]
-}
-
-model BloodType {
-  id        Int     @id @default(autoincrement())
-  name      String  @db.VarChar(150)
-  species   Species @relation(fields: [speciesId], references: [id])
-  speciesId Int
-  Pet       Pet[]
-  Alert     Alert[]
-}
-
-model Breed {
-  id        Int     @id @default(autoincrement())
-  name      String  @db.VarChar(150)
-  species   Species @relation(fields: [speciesId], references: [id])
-  speciesId Int
-  Pet       Pet[]
+  species       String      @db.VarChar(150)
+  bloodType     String      @db.VarChar(150)
 }
 
 model Appointment {
-  id            Int               @id @default(autoincrement())
-  data          DateTime          @default(now())
-  type          AppointmentType   @relation(fields: [typeId], references: [id])
-  typeId        Int
-  result        ResultAppointment @relation(fields: [resultId], references: [id])
-  resultId      Int               @unique
-  pet           Pet               @relation(fields: [petId], references: [id])
+  id            Int         @id @default(autoincrement())
+  data          DateTime    @default(now())
+  type          String      @db.VarChar(150)
+  result        String?     @db.VarChar(150)
+  pet           Pet         @relation(fields: [petId], references: [id])
   petId         Int
-  bloodCenter   BloodCenter       @relation(fields: [bloodCenterId], references: [id])
+  bloodCenter   BloodCenter @relation(fields: [bloodCenterId], references: [id])
   bloodCenterId Int
-}
-
-model ResultAppointment {
-  id          Int          @id @default(autoincrement())
-  link        String
-  Appointment Appointment?
-}
-
-model AppointmentType {
-  id          Int           @id @default(autoincrement())
-  name        String        @db.VarChar(150)
-  Appointment Appointment[]
 }
 
 enum Sex {

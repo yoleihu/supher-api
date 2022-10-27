@@ -13,12 +13,12 @@ export class AlertRepository {
     })
   }
 
-  async findAllByBloodCenter(bloodCenterId: number): Promise<AlertEntity[]> {
+  async findAllByBloodCenterId(bloodCenterId: number): Promise<AlertEntity[]> {
     return this.prisma.alert.findMany({
       where: {
-        bloodCenterId
+        bloodCenterId,
       },
-  });
+    });
   }
 
   findOne(id: number): Promise<AlertEntity> {

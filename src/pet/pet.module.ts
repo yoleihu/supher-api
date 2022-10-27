@@ -5,7 +5,6 @@ import { PetRepository } from "./repositories/pet.repository";
 import { PetService } from "./pet.service";
 import { AuthModule } from "src/auth/auth.module";
 
-
 @Module({
   imports: [forwardRef(() => AuthModule)],
   controllers: [PetController],

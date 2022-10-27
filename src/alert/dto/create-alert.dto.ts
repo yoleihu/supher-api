@@ -1,6 +1,12 @@
+import { IsNotEmpty } from "class-validator"
+
 export class CreateAlertDto {
-  data?: Date | string
-  bloodTypeId: number
-  speciesId: number
+  @IsNotEmpty()
+  data: Date
+  @IsNotEmpty()
   bloodCenterId: number
+  @IsNotEmpty()
+  bloodType: string
+  @IsNotEmpty()
+  species: string
 }

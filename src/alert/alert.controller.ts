@@ -3,7 +3,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AlertService } from './alert.service';
 import { CreateAlertDto } from './dto/create-alert.dto';
 
-@Controller('alert')
+@Controller("alert")
 export class AlertController {
   constructor(private readonly alertService: AlertService) {}
 
@@ -14,14 +14,14 @@ export class AlertController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('list')
-  findAll(@Body() bloodCenterId: number) {
-    return this.alertService.findAllByBloodCenter(bloodCenterId);
+  @Get('list/:bloodCenterId')
+  findAll(@Param("bloodCenterId") bloodCenterId: number) {
+    return this.alertService.findAllByBloodCenterId(bloodCenterId);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param("id") id: string) {
     return this.alertService.findOne(+id);
   }
 

@@ -1,9 +1,7 @@
 import { Sex, Status } from "@prisma/client"
-import { IsNotEmpty } from "class-validator"
+import { IsNotEmpty, IsOptional } from "class-validator"
 
 export class CreatePetDto {
-  id: number
-
   @IsNotEmpty()
   guardianId: number
 
@@ -11,12 +9,24 @@ export class CreatePetDto {
   name: string
 
   @IsNotEmpty()
-  speciesId: number
-  statusToDonation?: Status
+  species: string
 
+  @IsOptional()
+  statusToDonation: Status | null
+
+  @IsOptional()
   sexOfPet: Sex
-  age?: string
-  bloodTypeId?: number
-  weight?: string
-  breedId?: number
+
+  @IsOptional()
+  age: string | null
+
+  @IsOptional()
+  bloodType: string | null
+
+  @IsOptional()
+  weight: string | null
+
+  @IsOptional()
+  breed: string | null
 }
+

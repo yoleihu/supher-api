@@ -11,8 +11,8 @@ export class AlertService {
     return this.repository.create(createAlertmentDto);
   }
 
-  findAllByBloodCenter(bloodCenterId: number) {
-    return this.repository.findAllByBloodCenter(bloodCenterId);
+  findAllByBloodCenterId(id: number) {
+    return this.repository.findAllByBloodCenterId(id);
   }
 
   findOne(id: number) {

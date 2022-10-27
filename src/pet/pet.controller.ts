@@ -14,13 +14,13 @@ export class PetController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('list')
-  findAll(@Body() guardianId: number) {
+  @Get('list/:guardianId')
+  findAll(@Param("guardianId") guardianId: number) {
     return this.petService.findAllByGuardianId(guardianId);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get(":id")
+  @Get(':id')
   findOne(@Param("id") id: number) {
     return this.petService.findOne(id);
   }
