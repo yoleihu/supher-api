@@ -65,18 +65,18 @@ CREATE TABLE "pet" (
 );
 
 -- CreateTable
-CREATE TABLE "Alert" (
+CREATE TABLE "alert" (
     "id" SERIAL NOT NULL,
     "data" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "bloodCenterId" INTEGER NOT NULL,
     "species" VARCHAR(150) NOT NULL,
     "bloodType" VARCHAR(150) NOT NULL,
 
-    CONSTRAINT "Alert_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "alert_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Appointment" (
+CREATE TABLE "appointment" (
     "id" SERIAL NOT NULL,
     "data" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "type" VARCHAR(150) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE "Appointment" (
     "petId" INTEGER NOT NULL,
     "bloodCenterId" INTEGER NOT NULL,
 
-    CONSTRAINT "Appointment_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "appointment_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -109,10 +109,10 @@ CREATE UNIQUE INDEX "bloodCenter_email_key" ON "bloodCenter"("email");
 ALTER TABLE "pet" ADD CONSTRAINT "pet_guardianId_fkey" FOREIGN KEY ("guardianId") REFERENCES "guadian"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Alert" ADD CONSTRAINT "Alert_bloodCenterId_fkey" FOREIGN KEY ("bloodCenterId") REFERENCES "bloodCenter"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "alert" ADD CONSTRAINT "alert_bloodCenterId_fkey" FOREIGN KEY ("bloodCenterId") REFERENCES "bloodCenter"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Appointment" ADD CONSTRAINT "Appointment_petId_fkey" FOREIGN KEY ("petId") REFERENCES "pet"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "appointment" ADD CONSTRAINT "appointment_petId_fkey" FOREIGN KEY ("petId") REFERENCES "pet"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Appointment" ADD CONSTRAINT "Appointment_bloodCenterId_fkey" FOREIGN KEY ("bloodCenterId") REFERENCES "bloodCenter"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "appointment" ADD CONSTRAINT "appointment_bloodCenterId_fkey" FOREIGN KEY ("bloodCenterId") REFERENCES "bloodCenter"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

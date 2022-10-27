@@ -80,6 +80,8 @@ model Alert {
   bloodCenterId Int
   species       String      @db.VarChar(150)
   bloodType     String      @db.VarChar(150)
+
+  @@map("alert")
 }
 
 model Appointment {
@@ -91,6 +93,7 @@ model Appointment {
   petId         Int
   bloodCenter   BloodCenter @relation(fields: [bloodCenterId], references: [id])
   bloodCenterId Int
+  @@map("appointment")
 }
 
 enum Sex {

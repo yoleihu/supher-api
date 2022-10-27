@@ -3,12 +3,12 @@ import { AppointmentService } from './appointment.service';
 import { AppointmentController } from './appointment.controller';
 import { AuthModule } from 'src/auth/auth.module';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PetRepository } from 'src/pet/repositories/pet.repository';
+import { AppointmentRepository } from './repositories/appointment.repository';
 
 @Module({
   imports: [forwardRef(() => AuthModule)],
   controllers: [AppointmentController],
-  providers: [AppointmentService, PrismaService, PetRepository],
+  providers: [AppointmentService, PrismaService, AppointmentRepository],
   exports: [AppointmentService],
 })
 export class AppointmentModule {}

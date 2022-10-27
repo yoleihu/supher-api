@@ -15,8 +15,8 @@ export class AlertController {
 
   @UseGuards(JwtAuthGuard)
   @Get('list/:bloodCenterId')
-  findAll(@Param("bloodCenterId") bloodCenterId: number) {
-    return this.alertService.findAllByBloodCenterId(bloodCenterId);
+  findAll(@Param("bloodCenterId") bloodCenterId: string) {
+    return this.alertService.findAllByBloodCenterId(+bloodCenterId);
   }
 
   @UseGuards(JwtAuthGuard)

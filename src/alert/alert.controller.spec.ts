@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AlertController } from './alert.controller';
 import { AlertService } from './alert.service';
 
-describe('AlertController', () => {
+describe("AlertController", () => {
   let controller: AlertController;
 
   beforeEach(async () => {
