@@ -20,7 +20,7 @@ export class AlertController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get(':id')
+  @Get(":id")
   findOne(@Param("id") id: string) {
     return this.alertService.findOne(+id);
   }
