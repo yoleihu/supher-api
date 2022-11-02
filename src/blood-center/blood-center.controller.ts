@@ -34,8 +34,8 @@ export class BloodCenterController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('list-nears')
-  findAllByLocal(cep: string) {
+  @Get('list-nears:cep')
+  findAllByLocal(@Param('cep') cep: string) {
     return this.bloodCenterService.findAllByLocal(cep);
   }
 
