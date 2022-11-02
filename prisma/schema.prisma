@@ -88,7 +88,7 @@ model Appointment {
   id            Int         @id @default(autoincrement())
   data          DateTime    @default(now())
   type          String      @db.VarChar(150)
-  result        String?     @db.VarChar(150)
+  result        String?     @db.VarChar()
   pet           Pet         @relation(fields: [petId], references: [id])
   petId         Int
   bloodCenter   BloodCenter @relation(fields: [bloodCenterId], references: [id])
