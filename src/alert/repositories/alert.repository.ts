@@ -41,7 +41,7 @@ export class AlertRepository {
   async remove(id: number) {
     this.prisma.alert.delete({
       where: {
-        id,
+        id: id,
       },
     })
   }
