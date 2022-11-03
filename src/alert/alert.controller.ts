@@ -33,7 +33,7 @@ export class AlertController {
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.alertService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.alertService.remove(id);
   }
 }
