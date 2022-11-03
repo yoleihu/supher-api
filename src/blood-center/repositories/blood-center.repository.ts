@@ -50,7 +50,7 @@ export class BloodCenterRepository {
   }
 
   async remove(id: number) {
-    this.prisma.bloodCenter.delete({
+    return this.prisma.bloodCenter.delete({
       where: {
         id,
       },

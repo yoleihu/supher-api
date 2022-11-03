@@ -39,7 +39,7 @@ export class TokenRepository {
   }
 
   delete(username: string){
-    this.prisma.token.delete(
+    return this.prisma.token.delete(
       {
         where: {
           username,

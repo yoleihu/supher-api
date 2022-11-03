@@ -48,7 +48,7 @@ export class PetRepository {
   }
 
   async remove(id: number) {
-    this.prisma.pet.delete({
+    return this.prisma.pet.delete({
       where: {
         id,
       },

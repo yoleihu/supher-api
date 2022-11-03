@@ -39,7 +39,7 @@ export class AppointmentRepository {
   }
 
   async remove(id: number) {
-    this.prisma.appointment.delete({
+    return this.prisma.appointment.delete({
       where: {
         id,
       },

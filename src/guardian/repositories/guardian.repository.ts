@@ -40,7 +40,7 @@ export class GuardianRepository {
   }
 
   async remove(id: number) {
-    this.prisma.guardian.delete({
+    return this.prisma.guardian.delete({
       where: {
         id,
       },
