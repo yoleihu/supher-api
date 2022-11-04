@@ -39,11 +39,10 @@ export class AuthService {
     };
   }
 
-  async generateLink(email: string, url: string) {
+  async generateLink(email: string, token: string) {
     const payload = { username: email };
-    const token = this.jwtService.sign(payload);
     this.tokenService.save(token, email);
-    return (url + "/" + token);
+    return (token);
   }
 
   async create(user: any) {
