@@ -19,11 +19,15 @@ export class BloodCenterRepository {
   }
 
   findOne(id: number): Promise<BloodCenterEntity> {
-    return this.prisma.bloodCenter.findUnique({
-      where: {
-        id,
-      },
-    });
+    try{
+      return this.prisma.bloodCenter.findUnique({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
   }
 
   async findAllByLocal(firstNumberCep: string): Promise<BloodCenterEntity[]> {

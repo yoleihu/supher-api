@@ -19,11 +19,15 @@ export class GuardianRepository {
   }
 
   findOne(id: number): Promise<GuardianEntity> {
-    return this.prisma.guardian.findUnique({
-      where: {
-        id,
-      },
-    });
+    try{
+      return this.prisma.guardian.findUnique({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      return error;
+    }
   }
 
   async findByEmail(email: string): Promise<GuardianEntity> {
