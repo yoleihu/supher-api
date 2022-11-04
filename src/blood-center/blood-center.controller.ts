@@ -46,6 +46,12 @@ export class BloodCenterController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Patch('pass/:id')
+  updatePassword(@Param('id') id: string, @Body() password: string) {
+    return this.bloodCenterService.updatePass(+id, password);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.bloodCenterService.remove(+id);

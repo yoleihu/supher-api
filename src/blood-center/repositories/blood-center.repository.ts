@@ -49,6 +49,17 @@ export class BloodCenterRepository {
     })
   }
 
+  async updatePass(id: number, pass: string): Promise<BloodCenterEntity> {
+    return this.prisma.bloodCenter.update({
+      where: {
+        id,
+      },
+      data: {
+        name: pass,
+      },
+    })
+  }
+
   async remove(id: number) {
     return this.prisma.bloodCenter.delete({
       where: {

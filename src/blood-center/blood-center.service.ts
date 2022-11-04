@@ -38,6 +38,11 @@ export class BloodCenterService {
     return this.repository.update(id, updateBloodCenterDto);
   }
 
+  updatePass(id: number, password: string) {
+    const pass= bcrypt.hashSync(password, 8);
+    return this.repository.updatePass(id, pass);
+  }
+
   remove(id: number) {
     return this.repository.remove(id);
   }

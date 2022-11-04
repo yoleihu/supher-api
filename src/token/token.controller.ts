@@ -1,6 +1,6 @@
 import {
   Body,
-  Controller, Delete, Param, Patch, Put,
+  Controller, Delete, Param, Patch, Put, Post
 } from "@nestjs/common";
 import { AuthService } from '../auth/auth.service';
 import { RefreshTokenDto } from "./dto/refresh.token.dto";
@@ -14,6 +14,12 @@ export class TokenController {
     @Put("refresh")
     async refreshToken(@Body() data: RefreshTokenDto){
       const objToken = await this.tokenService.refreshToken(data.oldToken);
+      return objToken;
+    }
+
+    @Post()
+    async createCode(@Body() data: {hash: string, username: string}){
+      const objToken = await this.tokenService.save(data.hash, data.username);
       return objToken;
     }
 
