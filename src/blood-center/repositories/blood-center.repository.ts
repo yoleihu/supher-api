@@ -41,7 +41,11 @@ export class BloodCenterRepository {
   }
 
   async findByEmail(email: string): Promise<BloodCenterEntity> {
-    return this.prisma.bloodCenter.findUnique({ where: { email } });
+    return this.prisma.bloodCenter.findUnique({
+      where: {
+        email: email,
+      }
+    });
   }
 
   async update(id: number, updateBloodCenterDto: UpdateBloodCenterDto): Promise<BloodCenterEntity> {
