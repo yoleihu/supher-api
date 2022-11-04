@@ -30,10 +30,6 @@ export class GuardianService {
   }
 
   async findOne(email: string) {
-    const guardian = this.repository.findByEmail(email);
-    if(guardian) {
-      return guardian;
-    }
-    return new HttpException("Usuário não autorizado.", HttpStatus.NOT_FOUND);
+    return this.repository.findByEmail(email);
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, HttpException, HttpStatus } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { BloodCenterService } from './blood-center.service';
 import { CreateBloodCenterDto } from './dto/create-blood-center.dto';
@@ -30,8 +30,13 @@ export class BloodCenterController {
 
   @Get(':email')
   findOne(@Param('email') email: string) {
-    return this.bloodCenterService.findOne(email);
+    const bc = this.bloodCenterService.findOne(email);
+    if(bc) {
+      return bc;
+    }
+    return new HttpException("Usuário não autorizado.", HttpStatus.NOT_FOUND);
   }
+  
 
   @UseGuards(JwtAuthGuard)
   @Get('list-nears/:cep')

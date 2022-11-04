@@ -9,6 +9,7 @@ import {
   UseGuards,
   Request,
   HttpException,
+  HttpStatus,
 } from "@nestjs/common";
 import { GuardianService } from "./guardian.service";
 import { CreateGuardianDto } from "./dto/create-guardian.dto";
@@ -41,8 +42,13 @@ export class GuardianController {
 
   @Get(":email")
   findOne(@Param("email") email: string) {
-    return this.guardianService.findOne(email);
+    const guardian = this.guardianService.findOne(email);
+    if(guardian) {
+      return guardian;
+    }
+    return new HttpException("Usuário não autorizado.", HttpStatus.NOT_FOUND);
   }
+
 
   @UseGuards(JwtAuthGuard)
   @Patch(":id")

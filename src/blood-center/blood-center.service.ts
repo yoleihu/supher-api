@@ -49,10 +49,6 @@ export class BloodCenterService {
   }
 
   async findOne(email: string) {
-    const bc = this.repository.findByEmail(email);
-    if(bc) {
-      return bc;
-    }
-    return new HttpException("Usuário não autorizado.", HttpStatus.NOT_FOUND);
+    return this.repository.findByEmail(email);
   }
 }
