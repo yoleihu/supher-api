@@ -36,7 +36,7 @@ export class BloodCenterController {
     }
     return new HttpException("Usuário não autorizado.", HttpStatus.NOT_FOUND);
   }
-  
+
 
   @UseGuards(JwtAuthGuard)
   @Get('list-nears/:cep')
@@ -65,7 +65,7 @@ export class BloodCenterController {
   @Post("generate-link")
   generateLink (@Body() body: any) {
     if(this.bloodCenterService.findOne(body.email)) {
-      return(this.authService.generateLink(body.email, body.url))
+      return(this.authService.generateLink(body.email, body.hash))
     }
     return new HttpException("O e-mail informado não está cadastrado.", 404);
   }
