@@ -1,9 +1,9 @@
-import { Injectable } from "@nestjs/common";
 import { CreateGuardianDto } from "./dto/create-guardian.dto";
 import { UpdateGuardianDto } from "./dto/update-guardian.dto";
 import { GuardianRepository } from "./repositories/guardian.repository";
 import * as bcrypt from "bcrypt";
-import { GuardianEntity } from "./entities/guardian.entity";
+import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+
 
 @Injectable()
 export class GuardianService {
@@ -29,7 +29,11 @@ export class GuardianService {
     return this.repository.remove(id);
   }
 
-  async findOne(email: string): Promise<GuardianEntity | undefined> {
-    return this.repository.findByEmail(email);
+  async findOne(email: string) {
+    const guardian = this.repository.findByEmail(email);
+    if(guardian) {
+      return guardian;
+    }
+    return new HttpException("Usuário não autorizado.", HttpStatus.NOT_FOUND);
   }
 }

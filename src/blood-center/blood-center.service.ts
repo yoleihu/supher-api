@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
 import { CreateBloodCenterDto } from './dto/create-blood-center.dto';
 import { UpdateBloodCenterDto } from './dto/update-blood-center.dto';
 import { BloodCenterRepository } from './repositories/blood-center.repository';
 import * as bcrypt from "bcrypt";
 import { BloodCenterEntity } from './entities/blood-center.entity';
+import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+
 
 @Injectable()
 export class BloodCenterService {
@@ -47,7 +48,11 @@ export class BloodCenterService {
     return this.repository.remove(id);
   }
 
-  async findOne(email: string): Promise<BloodCenterEntity | undefined> {
-    return this.repository.findByEmail(email);
+  async findOne(email: string) {
+    const bc = this.repository.findByEmail(email);
+    if(bc) {
+      return bc;
+    }
+    return new HttpException("Usuário não autorizado.", HttpStatus.NOT_FOUND);
   }
 }
