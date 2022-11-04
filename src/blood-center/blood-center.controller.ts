@@ -34,7 +34,7 @@ export class BloodCenterController {
     if(bc) {
       return bc;
     }
-    return new HttpException("Usuário não autorizado.", HttpStatus.NOT_FOUND);
+    return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
   }
 
 
@@ -64,9 +64,6 @@ export class BloodCenterController {
 
   @Post("generate-link")
   generateLink (@Body() body: any) {
-    if(this.bloodCenterService.findOne(body.email)) {
-      return(this.authService.generateLink(body.email, body.hash))
-    }
-    return new HttpException("O e-mail informado não está cadastrado.", 404);
+    return(this.authService.generateLink(body.email, body.hash));
   }
 }

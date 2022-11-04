@@ -46,7 +46,7 @@ export class GuardianController {
     if(guardian) {
       return guardian;
     }
-    return new HttpException("Usuário não autorizado.", HttpStatus.NOT_FOUND);
+    return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
   }
 
 
@@ -67,9 +67,6 @@ export class GuardianController {
 
   @Post("generate-link")
   generateLink (@Body() body: any) {
-    if(this.guardianService.findOne(body.email)) {
-      return(this.authService.generateLink(body.email, body.url))
-    }
-    return new HttpException("O e-mail informado não está cadastrado.", 404);
+    return(this.authService.generateLink(body.email, body.hash));
   }
 }
