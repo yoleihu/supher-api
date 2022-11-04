@@ -28,6 +28,7 @@ export class BloodCenterController {
     return this.bloodCenterService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':email')
   findOne(@Param('email') email: string) {
     const bc = this.bloodCenterService.findOne(email);
@@ -64,6 +65,9 @@ export class BloodCenterController {
 
   @Post("generate-link")
   generateLink (@Body() body: any) {
-    return(this.authService.generateLink(body.email, body.hash));
+    const bc = this.bloodCenterService.findOne(body.email);
+    if(bc) {
+      return(this.authService.generateLink(body.email, body.hash));    }
+    return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
   }
 }

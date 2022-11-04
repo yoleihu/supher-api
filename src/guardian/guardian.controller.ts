@@ -40,6 +40,7 @@ export class GuardianController {
     return this.guardianService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(":email")
   findOne(@Param("email") email: string) {
     const guardian = this.guardianService.findOne(email);
@@ -67,6 +68,10 @@ export class GuardianController {
 
   @Post("generate-link")
   generateLink (@Body() body: any) {
-    return(this.authService.generateLink(body.email, body.hash));
+    const guardian = this.guardianService.findOne(body.email);
+    if(guardian) {
+      return(this.authService.generateLink(body.email, body.hash));
+    }
+    return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
   }
 }
