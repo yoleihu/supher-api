@@ -68,10 +68,12 @@ export class GuardianController {
 
   @Post("generate-link")
   generateLink (@Body() body: any) {
-    const guardian = this.findOne(body.email);
-    if(guardian) {
-      return(this.authService.generateLink(body.email, body.hash));
-    }
-    return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
+    return(this.authService.generateLink(body.email, body.hash));
+
+    // const guardian = this.findOne(body.email);
+    // if(guardian) {
+    //   return(this.authService.generateLink(body.email, body.hash));
+    // }
+    // return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
   }
 }

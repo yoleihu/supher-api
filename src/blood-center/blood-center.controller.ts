@@ -65,11 +65,14 @@ export class BloodCenterController {
 
   @Post("generate-link")
   generateLink (@Body() body: any) {
-    const bc = this.findOne(body.email);
-    if(bc) {
-      return(this.authService.generateLink(body.email, body.hash));
-    } else {
-      return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
-    }
+
+    return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
+
+    // const bc = this.findOne(body.email);
+    // if(bc) {
+    //   return(this.authService.generateLink(body.email, body.hash));
+    // } else {
+    //   return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
+    // }
   }
 }
