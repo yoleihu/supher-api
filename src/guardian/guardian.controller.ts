@@ -17,6 +17,7 @@ import { UpdateGuardianDto } from "./dto/update-guardian.dto";
 import { AuthGuard } from "@nestjs/passport";
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
+import { GuardianEntity } from "./entities/guardian.entity";
 
 @Controller("guardian")
 export class GuardianController {
@@ -69,7 +70,7 @@ export class GuardianController {
   @Post("generate-link")
   generateLink (@Body() body: any) {
     const guardian = this.guardianService.findOne(body.email);
-    if(guardian) {
+    if(guardian instanceof GuardianEntity) {
       return(this.authService.generateLink(body.email, body.hash));
     }
     return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);

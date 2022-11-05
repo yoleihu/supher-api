@@ -67,7 +67,7 @@ export class BloodCenterController {
   @Post("generate-link")
   generateLink (@Body() body: any) {
     const bc = this.bloodCenterService.findOne(body.email);
-    if(bc) {
+    if(bc instanceof BloodCenterEntity) {
       return(this.authService.generateLink(body.email, body.hash));
     } else {
       return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
