@@ -40,7 +40,7 @@ export class BloodCenterRepository {
     });
   }
 
-  async findByEmail(email: string): Promise<BloodCenterEntity> {
+  async findByEmail(email: string) {
     return this.prisma.bloodCenter.findUnique({
       where: {
         email: email,

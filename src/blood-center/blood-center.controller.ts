@@ -5,6 +5,7 @@ import { CreateBloodCenterDto } from './dto/create-blood-center.dto';
 import { AuthGuard } from "@nestjs/passport";
 import { UpdateBloodCenterDto } from './dto/update-blood-center.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { BloodCenterEntity } from './entities/blood-center.entity';
 
 @Controller('blood-center')
 export class BloodCenterController {
@@ -65,8 +66,9 @@ export class BloodCenterController {
 
   @Post("generate-link")
   generateLink (@Body() body: any) {
-    if(this.bloodCenterService.findOne(body.email)) {
-      console.log(this.bloodCenterService.findOne(body.email));
+    const bc = this.bloodCenterService.findOne(body.email);
+    if(bc) {
+      console.log(bc);
       return(this.authService.generateLink(body.email, body.hash));
     } else {
       return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
