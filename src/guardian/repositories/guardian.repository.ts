@@ -31,7 +31,7 @@ export class GuardianRepository {
   }
 
   async findByEmail(email: string): Promise<GuardianEntity> {
-    return this.prisma.guardian.findUnique({ where: { email } });
+    return this.prisma.guardian.findUnique({ where: { email:email } });
   }
 
   async update(id: number, updateGuardianDto: UpdateGuardianDto): Promise<GuardianEntity> {
