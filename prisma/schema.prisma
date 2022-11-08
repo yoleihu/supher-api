@@ -68,7 +68,6 @@ model Pet {
   bloodType        String?       @db.VarChar(150)
   weight           String?       @db.VarChar(5)
   breed            String?       @db.VarChar(150)
-  Appointment      Appointment[]
 
   @@map("pet")
 }
@@ -89,8 +88,7 @@ model Appointment {
   data          DateTime    @default(now())
   type          String      @db.VarChar(150)
   result        String?     @db.VarChar()
-  pet           Pet         @relation(fields: [petId], references: [id])
-  petId         Int
+  pet           String      @db.VarChar(5)
   bloodCenter   BloodCenter @relation(fields: [bloodCenterId], references: [id])
   bloodCenterId Int
   @@map("appointment")

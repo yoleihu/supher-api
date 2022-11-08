@@ -16,7 +16,7 @@ CREATE TABLE "token" (
 -- CreateTable
 CREATE TABLE "guadian" (
     "id" SERIAL NOT NULL,
-    "cpf" VARCHAR(11) NOT NULL,
+    "cpf" VARCHAR(14) NOT NULL,
     "name" VARCHAR(150) NOT NULL,
     "number" VARCHAR(10),
     "address" VARCHAR(150),
@@ -35,7 +35,7 @@ CREATE TABLE "guadian" (
 -- CreateTable
 CREATE TABLE "bloodCenter" (
     "id" SERIAL NOT NULL,
-    "cnpj" VARCHAR(14) NOT NULL,
+    "cnpj" VARCHAR(18) NOT NULL,
     "name" VARCHAR(150) NOT NULL,
     "number" VARCHAR(10),
     "address" VARCHAR(150),
@@ -83,8 +83,8 @@ CREATE TABLE "appointment" (
     "id" SERIAL NOT NULL,
     "data" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "type" VARCHAR(150) NOT NULL,
-    "result" VARCHAR(150),
-    "petId" INTEGER NOT NULL,
+    "result" VARCHAR,
+    "pet" VARCHAR(5) NOT NULL,
     "bloodCenterId" INTEGER NOT NULL,
 
     CONSTRAINT "appointment_pkey" PRIMARY KEY ("id")
@@ -113,9 +113,6 @@ ALTER TABLE "pet" ADD CONSTRAINT "pet_guardianId_fkey" FOREIGN KEY ("guardianId"
 
 -- AddForeignKey
 ALTER TABLE "alert" ADD CONSTRAINT "alert_bloodCenterId_fkey" FOREIGN KEY ("bloodCenterId") REFERENCES "bloodCenter"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "appointment" ADD CONSTRAINT "appointment_petId_fkey" FOREIGN KEY ("petId") REFERENCES "pet"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "appointment" ADD CONSTRAINT "appointment_bloodCenterId_fkey" FOREIGN KEY ("bloodCenterId") REFERENCES "bloodCenter"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
