@@ -1,5 +1,5 @@
 import { CreateBloodCenterDto } from './dto/create-blood-center.dto';
-import { UpdateBloodCenterDto } from './dto/update-blood-center.dto';
+import { UpdateBloodCenterDto, UpdatePassDto } from './dto/update-blood-center.dto';
 import { BloodCenterRepository } from './repositories/blood-center.repository';
 import * as bcrypt from "bcrypt";
 import { BloodCenterEntity } from './entities/blood-center.entity';
@@ -39,9 +39,9 @@ export class BloodCenterService {
     return this.repository.update(id, updateBloodCenterDto);
   }
 
-  updatePass(id: number, password: string) {
-    const pass= bcrypt.hashSync(password, 8);
-    return this.repository.updatePass(id, pass);
+  updatePass(body: UpdatePassDto) {
+    const pass= bcrypt.hashSync(body.pass, 8);
+    return this.repository.updatePass(body.email, pass);
   }
 
   remove(id: number) {

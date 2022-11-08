@@ -57,13 +57,13 @@ export class BloodCenterRepository {
     })
   }
 
-  async updatePass(id: number, pass: string): Promise<BloodCenterEntity> {
+  async updatePass(email: string, pass: string): Promise<BloodCenterEntity> {
     return this.prisma.bloodCenter.update({
       where: {
-        id,
+        email: email,
       },
       data: {
-        name: pass,
+        password: pass,
       },
     })
   }

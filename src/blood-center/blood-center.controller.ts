@@ -3,7 +3,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { BloodCenterService } from './blood-center.service';
 import { CreateBloodCenterDto } from './dto/create-blood-center.dto';
 import { AuthGuard } from "@nestjs/passport";
-import { UpdateBloodCenterDto } from './dto/update-blood-center.dto';
+import { UpdateBloodCenterDto, UpdatePassDto } from './dto/update-blood-center.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { BloodCenterEntity } from './entities/blood-center.entity';
 
@@ -52,9 +52,9 @@ export class BloodCenterController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch('pass/:id')
-  updatePassword(@Param('id') id: string, @Body() password: string) {
-    return this.bloodCenterService.updatePass(+id, password);
+  @Patch('pass')
+  updatePassword( @Body() body: UpdatePassDto) {
+    return this.bloodCenterService.updatePass(body);
   }
 
   @UseGuards(JwtAuthGuard)

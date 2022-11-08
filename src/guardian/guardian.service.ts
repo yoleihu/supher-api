@@ -1,5 +1,5 @@
 import { CreateGuardianDto } from "./dto/create-guardian.dto";
-import { UpdateGuardianDto } from "./dto/update-guardian.dto";
+import { UpdateGuardianDto, UpdatePassDto } from "./dto/update-guardian.dto";
 import { GuardianRepository } from "./repositories/guardian.repository";
 import * as bcrypt from "bcrypt";
 import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
@@ -30,9 +30,9 @@ export class GuardianService {
     return this.repository.findAllByLocal(initlocal);
   }
 
-  updatePass(id: number, password: string) {
-    const pass= bcrypt.hashSync(password, 8);
-    return this.repository.updatePass(id, pass);
+  updatePass(body: UpdatePassDto) {
+    const pass= bcrypt.hashSync(body.pass, 8);
+    return this.repository.updatePass(body.email, pass);
   }
 
   update(id: number, updateGuardianDto: UpdateGuardianDto) {

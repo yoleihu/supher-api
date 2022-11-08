@@ -13,7 +13,7 @@ import {
 } from "@nestjs/common";
 import { GuardianService } from "./guardian.service";
 import { CreateGuardianDto } from "./dto/create-guardian.dto";
-import { UpdateGuardianDto } from "./dto/update-guardian.dto";
+import { UpdateGuardianDto, UpdatePassDto } from "./dto/update-guardian.dto";
 import { AuthGuard } from "@nestjs/passport";
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
@@ -48,9 +48,9 @@ export class GuardianController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch('pass/:id')
-  updatePassword(@Param('id') id: string, @Body() password: string) {
-    return this.guardianService.updatePass(+id, password);
+  @Patch('pass')
+  updatePassword( @Body() body: UpdatePassDto) {
+    return this.guardianService.updatePass(body);
   }
 
   @Get(":email")
