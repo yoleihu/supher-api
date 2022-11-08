@@ -1,7 +1,7 @@
 import { Appointment } from "@prisma/client";
 
 export class AppointmentEntity implements Appointment{
-  petId: number;
+  pet: string;
   id: number
   data: Date
   type: string

@@ -11,7 +11,7 @@ export class CreateAppointmentDto {
   result: string | null
 
   @IsNotEmpty()
-  petId: number
+  pet: string
 
   @IsNotEmpty()
   bloodCenterId: number
