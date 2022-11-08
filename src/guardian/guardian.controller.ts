@@ -54,6 +54,7 @@ export class GuardianController {
     return this.guardianService.updatePass(body.email, body.pass);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(":email")
   findOne(@Param("email") email: string) {
     const guardian = this.guardianService.findOne(email);

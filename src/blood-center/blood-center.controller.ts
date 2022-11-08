@@ -29,6 +29,7 @@ export class BloodCenterController {
     return this.bloodCenterService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':email')
   findOne(@Param('email') email: string) {
     const bc = this.bloodCenterService.findOne(email);
