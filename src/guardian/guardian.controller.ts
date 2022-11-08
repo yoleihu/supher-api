@@ -10,6 +10,7 @@ import {
   Request,
   HttpException,
   HttpStatus,
+  Put,
 } from "@nestjs/common";
 import { GuardianService } from "./guardian.service";
 import { CreateGuardianDto } from "./dto/create-guardian.dto";
@@ -48,7 +49,7 @@ export class GuardianController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch('pass')
+  @Put('pass')
   updatePassword( @Body() body: UpdatePassDto) {
     return this.guardianService.updatePass(body);
   }
