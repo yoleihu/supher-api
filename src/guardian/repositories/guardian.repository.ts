@@ -18,13 +18,13 @@ export class GuardianRepository {
     return this.prisma.guardian.findMany();
   }
 
-  async updatePass(email: string, pass: string): Promise<GuardianEntity> {
+  async updatePass(email: string, newPassword: string): Promise<GuardianEntity> {
     return this.prisma.guardian.update({
       where: {
         email: email,
       },
       data: {
-        password: pass,
+        password: newPassword,
       },
     })
   }
