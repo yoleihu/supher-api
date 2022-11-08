@@ -41,6 +41,18 @@ export class GuardianController {
     return this.guardianService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('list-nears/:cep')
+  findAllByLocal(@Param('cep') cep: string) {
+    return this.guardianService.findAllByLocal(cep);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('pass/:id')
+  updatePassword(@Param('id') id: string, @Body() password: string) {
+    return this.guardianService.updatePass(+id, password);
+  }
+
   @Get(":email")
   findOne(@Param("email") email: string) {
     const guardian = this.guardianService.findOne(email);

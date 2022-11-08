@@ -18,6 +18,27 @@ export class GuardianRepository {
     return this.prisma.guardian.findMany();
   }
 
+  async updatePass(id: number, pass: string): Promise<GuardianEntity> {
+    return this.prisma.guardian.update({
+      where: {
+        id,
+      },
+      data: {
+        name: pass,
+      },
+    })
+  }
+
+  async findAllByLocal(firstNumberCep: string): Promise<GuardianEntity[]> {
+    return this.prisma.guardian.findMany({
+      where: {
+        cep: {
+          startsWith: firstNumberCep,
+        },
+      },
+    });
+  }
+
   findOne(id: number): Promise<GuardianEntity> {
     try{
       return this.prisma.guardian.findUnique({
