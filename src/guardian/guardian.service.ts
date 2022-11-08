@@ -3,6 +3,8 @@ import { UpdateGuardianDto, UpdatePassDto } from "./dto/update-guardian.dto";
 import { GuardianRepository } from "./repositories/guardian.repository";
 import * as bcrypt from "bcrypt";
 import { forwardRef, HttpException, HttpStatus, Inject, Injectable } from "@nestjs/common";
+import { GuardianEntity } from "./entities/guardian.entity";
+
 
 
 @Injectable()
@@ -43,7 +45,11 @@ export class GuardianService {
     return this.repository.remove(id);
   }
 
-  async findOne(email: string) {
-    return this.repository.findByEmail(email);
+  async findEmail(email: string) : Promise<string> {
+    return (await this.repository.findByEmail(email)).email;
+  }
+
+  async findOne(email: string) : Promise<GuardianEntity> {
+    return (await this.repository.findByEmail(email));
   }
 }

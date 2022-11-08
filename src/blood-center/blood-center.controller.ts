@@ -29,9 +29,18 @@ export class BloodCenterController {
     return this.bloodCenterService.findAll();
   }
 
+  @Get('email/:email')
+  findOne(@Param('email') email: string) {
+    const bc = this.bloodCenterService.findEmail(email);
+    if(bc) {
+      return bc;
+    }
+    return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Get(':email')
-  findOne(@Param('email') email: string) {
+  findEmail(@Param('email') email: string) {
     const bc = this.bloodCenterService.findOne(email);
     if(bc) {
       return bc;

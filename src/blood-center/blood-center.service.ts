@@ -48,7 +48,11 @@ export class BloodCenterService {
     return this.repository.remove(id);
   }
 
-  async findOne(email: string) {
-    return this.repository.findByEmail(email);
+  async findEmail(email: string) : Promise<string> {
+    return (await this.repository.findByEmail(email)).email;
+  }
+
+  async findOne(email: string): Promise<BloodCenterEntity> {
+    return (await this.repository.findByEmail(email));
   }
 }

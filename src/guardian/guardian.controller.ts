@@ -54,16 +54,24 @@ export class GuardianController {
     return this.guardianService.updatePass(body.email, body.pass);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get(":email")
-  findOne(@Param("email") email: string) {
-    const guardian = this.guardianService.findOne(email);
+  @Get('email/:email')
+  findOne(@Param('email') email: string) {
+    const guardian = this.guardianService.findEmail(email);
     if(guardian) {
       return guardian;
     }
     return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get(':email')
+  findEmail(@Param('email') email: string) {
+    const guardian = this.guardianService.findOne(email);
+    if(guardian) {
+      return guardian;
+    }
+    return new HttpException("O e-mail informado não está cadastrado.", HttpStatus.NOT_FOUND);
+  }
 
   @UseGuards(JwtAuthGuard)
   @Patch(":id")
