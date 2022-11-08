@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, HttpException, HttpStatus, Put } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { BloodCenterService } from './blood-center.service';
 import { CreateBloodCenterDto } from './dto/create-blood-center.dto';
@@ -52,9 +52,9 @@ export class BloodCenterController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch('pass')
-  updatePassword( @Body() body: UpdatePassDto) {
-    return this.bloodCenterService.updatePass(body);
+  @Put('pass')
+  updatePassword(@Body() body: any) {
+    return this.bloodCenterService.updatePass(body.email, body.pass);
   }
 
   @UseGuards(JwtAuthGuard)

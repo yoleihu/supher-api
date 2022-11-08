@@ -39,9 +39,9 @@ export class BloodCenterService {
     return this.repository.update(id, updateBloodCenterDto);
   }
 
-  updatePass(body: UpdatePassDto) {
-    const pass= bcrypt.hashSync(body.pass, 8);
-    return this.repository.updatePass(body.email, pass);
+  updatePass(email: string, pass: string) {
+    const newPassword= bcrypt.hashSync(pass, 8);
+    return this.repository.updatePass(email, newPassword);
   }
 
   remove(id: number) {
