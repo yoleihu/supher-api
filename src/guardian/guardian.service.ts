@@ -30,9 +30,9 @@ export class GuardianService {
     return this.repository.findAllByLocal(initlocal);
   }
 
-  updatePass(updatePassDto: UpdatePassDto) {
-    const newPassword= bcrypt.hashSync(updatePassDto.pass, 8);
-    return this.repository.updatePass(updatePassDto.email, newPassword);
+  updatePass(email: string, pass: string) {
+    const newPassword= bcrypt.hashSync(pass, 8);
+    return this.repository.updatePass(email, newPassword);
   }
 
   update(id: number, updateGuardianDto: UpdateGuardianDto) {

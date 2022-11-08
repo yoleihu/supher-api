@@ -50,8 +50,8 @@ export class GuardianController {
 
   @UseGuards(JwtAuthGuard)
   @Put('pass')
-  updatePassword(@Body() updatePassDto: UpdatePassDto) {
-    return this.guardianService.updatePass(updatePassDto);
+  updatePassword(@Body() body: any) {
+    return this.guardianService.updatePass(body.email, body.pass);
   }
 
   @Get(":email")
